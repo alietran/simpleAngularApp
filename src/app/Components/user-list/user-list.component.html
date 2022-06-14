@@ -1,53 +1,88 @@
-
 <div class="container">
   <div class="">
-    <button class="btn btn-success float-right "> <i class="fa-solid fa-plus"></i> Add New User</button>
+    <button class="btn btn-success float-right " data-toggle="modal" data-target="#exampleModal"> <i
+        class="fa-solid fa-plus"></i> Add New User</button>
   </div>
   <!-- <p (click)="hideEmail()">a</p> -->
   <div class="card my-4">
     <div class="card-header ">
       <div class="dataTable-top">
-        <div class="dataTable-dropdown"><label>
-          <select class="dataTable-selector" [(ngModel)]="item">
-              <option value=5>5</option>
-              <option value=10>10</option>
-              <option value=15>15</option>
-              <option value=20>20</option>
-              <option value=25>25</option>
-            </select>
-          entries per page</label>
-          </div>
+        <select class="dataTable-selector12" [(ngModel)]="statusSelected" (ngModelChange)="changeStatus()">
+          <option selected value="all">All</option>
+          <option value="true" >Active</option>
+          <option value="false">Suspended</option>
+        </select>
 
-        <div class="dataTable-search " ><input class="dataTable-input" name="name" [(ngModel)]="name" (ngModelChange)="search()" placeholder="Search..." type="text"></div>
+        <div class="dataTable-search"><input class="dataTable-input" name="name" [(ngModel)]="name"
+            (ngModelChange)="search()" placeholder="Search..." type="text"  (pageBoundsCorrection)="changeStatus()" ></div>
       </div>
     </div>
     <!-- <div class="card-body"> -->
-      <table class="table ">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Full Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Phone</th>
-            <th scope="col">Date Of Birth</th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let user of userList | paginate: { itemsPerPage: item  , currentPage: page} ; let i = index ">
-            <th scope="row">{{i+1}}</th>
-            <td>{{user.firstname + " " + user.lastname}} </td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone}}</td>
-            <td>{{user.dob}}</td>
-            <td>
-              <button class="btn btn-primary ">Edit</button>
-              <button class="btn btn-danger ml-4">Edit</button>
-            </td>
+    <table class="table ">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" (click)="sort('firstname')">Full Name <i class="fa-solid fa-sort"></i></th>
+          <th scope="col" (click)="sort('email')">Email <i class="fa-solid fa-sort"></i></th>
+          <th scope="col" (click)="sort('phone')">Phone <i class="fa-solid fa-sort"></i></th>
+          <th scope="col">Date Of Birth </th>
+          <th scope="col" (click)="sort('status')">Status <i class="fa-solid fa-sort"></i></th>
+          <th colspan="2"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let user of userList |filterStatus :statusSelected  | orderBy: orderTitle : descOrder  | paginate: { itemsPerPage: item  , currentPage: page} ; let i = index  ">
+          <th scope="row">{{i+1}}</th>
+          <td>{{user.firstname + " " + user.lastname}} </td>
+          <td>{{user.email}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.dob}}</td>
+          <td>{{user.status}}</td>
+          <td>
+            <button class="btn btn-primary ">Edit</button>
+            <button class="btn btn-danger ml-4" (click)="onDelete(user.id)">Delete</button>
+          </td>
 
-          </tr>
-        </tbody>
-      </table>
-      <pagination-controls class="text-right" (pageChange)="page = $event"></pagination-controls>
+        </tr>
+      </tbody>
+    </table>
+    <div class="d-flex justify-content-end">
+      <!-- class="" -->
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      <div class="dataTable-dropdown text-right mr-2"><label>
+          <select class="dataTable-selector" [(ngModel)]="item">
+            <option value=5>5</option>
+            <option value=10>10</option>
+            <option value=15>15</option>
+            <option value=20>20</option>
+            <option value=25>25</option>
+          </select>
+          entries per page </label>
+      </div>
+    </div>
+
     <!-- </div> -->
   </div>
+  <app-add-user></app-add-user>
+  <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body  ">
+       
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+</div>

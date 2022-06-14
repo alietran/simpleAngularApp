@@ -1,0 +1,77 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body  ">
+        <div class=" addUser__background">
+          <form id="addUserForm" class="addUser__form"  [formGroup]="addUserForm">
+            <div class="d-flex">
+              <div class="addUser__form__input mr-2 form-group">
+                <label for="firstname">First Name <span style="color:red; font-weight: normal;">(*)</span></label>
+                <input formControlName="firstname" value="" id="firstname" type="text" name="firstname">
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="lastname">Last Name <span style="color:red; font-weight: normal;">(*)</span></label>
+                <input formControlName="lastname" value="" id="lastname" type="text" name="lastname">
+              </div>
+            </div>
+
+            <div class="addUser__form__input form-group">
+              <label for="email">Email <span style="color:red; font-weight: normal;">(*)</span></label>
+              <input formControlName="email" value="" id="email" type="email" name="email">
+
+            </div>
+
+            <div class="addUser__form__input form-group">
+              <label for="phone">Phone <span style="color:red; font-weight: normal;">(*)</span></label>
+              <input formControlName="phone" value="" id="phone" type="phone" name="phone">
+
+
+            </div>
+            <div class="d-flex">
+              <div class="addUser__form__input form-group">
+                <label for="dob">Date Of Birth <span style="color:red; font-weight: normal;">(*)</span></label>
+                <!-- <input formControlName="dob" value="" id="dob" type="password" name="dob"> -->
+                <input type="date" id="dob"  formControlName="dob" value="" id="dob"name="dob" value="yyyy/mm/dd">
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="status">Status<span style="color:red; font-weight: normal;">(*)</span></label>
+                <input formControlName="status" value="" id="status" type="text" name="status">
+              </div>
+            </div>
+            <fieldset formGroupName="social">
+              <div class="addUser__form__input form-group">
+                <label for="facebook">Facebook</label>
+                <input formControlName="facebook" class="form-control" value="" id="facebook" type="url"
+                  name="facebook">
+
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="linkedin">Linkedin</label>
+                <input formControlName="linkedin" class="form-control" value="" id="linkedin" type="url"
+                  name="linkedin">
+
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="twitter">Twitter</label>
+                <input formControlName="twitter" class="form-control" value="" id="twitter" type="url" name="twitter">
+              </div>
+            </fieldset>
+
+
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary "  >Save changes</button>
+        <!-- [disabled]="!addUserForm.valid" (click)="onSubmit()"-->
+      </div>
+    </div>
+  </div>
+</div>

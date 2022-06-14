@@ -6,8 +6,12 @@ import { HeaderComponent } from './Components/header/header.component';
 import { UserListComponent } from './Components/user-list/user-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './Components/login/login.component';
+import { OrderModule } from 'ngx-order-pipe';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { AddUserComponent } from './Components/add-user/add-user.component';
+import { FilterStatusPipe } from './Pipe/filter-status.pipe';
 
 
 @NgModule({
@@ -16,13 +20,18 @@ import { LoginComponent } from './Components/login/login.component';
     HeaderComponent,
     UserListComponent,
     LoginComponent,
+    AddUserComponent,
+    FilterStatusPipe,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
      HttpClientModule,
      NgxPaginationModule,
-     FormsModule
+     FormsModule,
+     OrderModule,
+     FilterPipeModule,
+     ReactiveFormsModule,
 
   ],
   providers: [],
