@@ -65,9 +65,9 @@ export class AddUserComponent implements OnInit {
 
 
         this.router.navigateByUrl('/admin/users');
- alertify.success('Success message');
-       alertify.set('notifier','position', 'top-right');
-       alertify.success( alertify.get('notifier','position'));
+        alertify.success('Success message');
+      //  alertify.set('notifier','position', 'top-right');
+      //  alertify.success( alertify.get('notifier','position'));
 
     };
       back(){

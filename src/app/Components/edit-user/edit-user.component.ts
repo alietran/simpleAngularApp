@@ -5,7 +5,7 @@ import { User } from 'src/app/Models/user.model';
 import { UserService } from 'src/app/Services/user.service';
 import { UserListComponent } from '../user-list/user-list.component';
 import { formatDate, Location } from '@angular/common';
-
+import * as alertify from 'alertifyjs';
 interface Status {
   value: string;
   viewValue: string;
@@ -81,6 +81,10 @@ export class EditUserComponent implements OnInit {
           this.api.editUser(this.id, this.editUserForm.value).subscribe(data=>{
             // console.log("this.editUserForm.value",this.editUserForm.value);
                this.router.navigate(['admin/users'])
+               setTimeout(()=>{
+                 alertify.success('Success message');
+               },300)
+
           })
 
         }

@@ -82,15 +82,22 @@ export class UserListComponent implements OnInit {
       }
       else{
         console.log("name",this.name)
-        this.userList = this.userList.filter(res=>{
-          (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase())) || (res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()));
-        })
+        this.userList = this.userList.filter((res)=>{
+
+          return (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()) || res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()))
+
+
+          // console.log("res.firstname", res.firstname);
+          // (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase())) || (res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()));
+      })
       }
   }
 
   sort(titleName: string){
+     console.log("this.descOrder first",this.descOrder)
     this.descOrder = !this.descOrder
     this.orderTitle = titleName; //fullname or phone or email
+    console.log("this.descOrder",this.descOrder)
   }
     changeStatus(){
       this.page =1;

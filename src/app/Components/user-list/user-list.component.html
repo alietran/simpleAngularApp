@@ -3,94 +3,98 @@
     <!-- <app-header></app-header> -->
     <div class="d-flex justify-content-end mt-5">
       <!-- data-toggle="modal" data-target="#exampleModal" -->
-      <a class="btn btn-success mr-2 " [routerLink]="['/admin/add-user/']" > <i class="fa-solid fa-plus"></i> Add New
+      <a class="btn btn-success mr-2 " [routerLink]="['/admin/add-user/']"> <i class="fa-solid fa-plus"></i> Add New
         User</a>
       <a class="btn btn-danger float-right " (click)="logout()"> Logout <i
           class="fa-solid fa-arrow-right-from-bracket"></i></a>
     </div>
     <!-- <p (click)="hideEmail()">a</p> -->
-    <div class="card my-4">
-      <div class="card-header ">
-        <div class="dataTable-top">
-          <!-- <select class="dataTable-selector12" [(ngModel)]="statusSelected" (ngModelChange)="changeStatus()">
+    <div class="wrap mt-5">
+      <div class="card my-4">
+        <div class="card-header ">
+          <div class="dataTable-top">
+            <!-- <select class="dataTable-selector12" [(ngModel)]="statusSelected" (ngModelChange)="changeStatus()">
           <option selected value="all">All</option>
           <option value="true" >Active</option>
           <option value="false">Suspended</option>
         </select> -->
-          <mat-form-field appearance="fill">
-            <mat-label>Status</mat-label>
-            <mat-select [(ngModel)]="statusSelected" (ngModelChange)="changeStatus()">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Status</mat-label>
+              <mat-select [(ngModel)]="statusSelected" (ngModelChange)="changeStatus()">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
 
-          <!-- <input formControlName="twitter" class="form-control py-4 px-4" value="" id="twitter" type="url" name="twitter"> -->
-          <div class="dataTable-search"><input class="dataTable-input form-control py-4 px-4" name="name"
-              [(ngModel)]="name" (ngModelChange)="search()" placeholder="Search..." type="text"
-              (pageBoundsCorrection)="changeStatus()"></div>
+            <!-- <input formControlName="twitter" class="form-control py-4 px-4" value="" id="twitter" type="url" name="twitter"> -->
+            <div class="dataTable-search"><input class="dataTable-input form-control py-4 px-4" name="name"
+                [(ngModel)]="name" (ngModelChange)="search()" placeholder="Search..." type="text"
+                (pageBoundsCorrection)="changeStatus()"></div>
+          </div>
         </div>
-      </div>
-      <!-- <div class="card-body"> -->
-      <table class="table ">
-        <thead class="thead-light">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col" (click)="sort('firstname')">Full Name <i class="fa-solid fa-sort"></i></th>
-            <th scope="col" (click)="sort('email')">Email <i class="fa-solid fa-sort"></i></th>
-            <th scope="col" (click)="sort('phone')">Phone <i class="fa-solid fa-sort"></i></th>
-            <th scope="col">Date Of Birth </th>
-            <th scope="col" (click)="sort('status')">Status <i class="fa-solid fa-sort"></i></th>
-            <th colspan="2"></th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr
-            *ngFor="let user of userList |filterStatus :statusSelected  | orderBy: orderTitle : descOrder  | paginate: { itemsPerPage: item  , currentPage: page} ; let i = index  ">
-            <th scope="row">{{i+1}}</th>
-            <td>{{user.firstname + " " + user.lastname}} </td>
-            <td>{{user.email}}</td>
-            <td>{{user.phone}}</td>
-            <td>{{user?.dob | date:"MM/dd/yyyy"}}</td>
-            <!-- | date: 'longDate' -->
-            <td>
-              <mat-slide-toggle color="primary" [checked]="user.status" (click)="changeStatusUser(user.id)">
-              </mat-slide-toggle>
-              <!-- <mat-slide-toggle (click)="changeStatusUser(user.id)">{{user.status}}</mat-slide-toggle></td> -->
+        <!-- <div class="card-body"> -->
+        <table class="table ">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col" (click)="sort('firstname')">Full Name <i class="fa-solid fa-sort"></i></th>
+              <th scope="col" (click)="sort('email')">Email <i class="fa-solid fa-sort"></i></th>
+              <th scope="col" (click)="sort('phone')">Phone <i class="fa-solid fa-sort"></i></th>
+              <th scope="col">Date Of Birth </th>
+              <th scope="col" (click)="sort('status')">Status <i class="fa-solid fa-sort"></i></th>
+              <th colspan="2"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let user of userList | filterStatus :statusSelected  | orderBy: orderTitle : descOrder  | paginate: { itemsPerPage: item  , currentPage: page} ; let i = index  ">
+              <th scope="row">{{i+1}}</th>
+              <td>{{user.firstname + " " + user.lastname}} </td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone}}</td>
+              <td>{{user?.dob | date:"MM/dd/yyyy"}}</td>
+              <!-- | date: 'longDate' -->
+              <td>
+                <mat-slide-toggle color="primary" [checked]="user.status" (click)="changeStatusUser(user.id)">
+                </mat-slide-toggle>
+                <!-- <mat-slide-toggle (click)="changeStatusUser(user.id)">{{user.status}}</mat-slide-toggle></td> -->
 
-            <td>
+              <td>
 
-              <!-- <button class="btn btn-primary" (click)="onEdit(user.id)"  data-toggle="modal" data-target="#edituser">Edit</button> -->
+                <!-- <button class="btn btn-primary" (click)="onEdit(user.id)"  data-toggle="modal" data-target="#edituser">Edit</button> -->
 
-              <a class="btn btn-primary" [routerLink]="['/admin/edit-user/',user.id]"><i
-                  class="fa-regular fa-pen-to-square"></i></a>
-              <button class="btn btn-danger ml-4" (click)="onDelete(user.id)"><i class="fa-solid fa-trash"></i></button>
+                <a class="btn btn-primary" [routerLink]="['/admin/edit-user/',user.id]"><i
+                    class="fa-regular fa-pen-to-square"></i></a>
+                <button class="btn btn-danger ml-4" (click)="onDelete(user.id)"><i
+                    class="fa-solid fa-trash"></i></button>
 
-              <!-- <button class="btn btn-danger ml-4" (click)="onDetaile(user.id)">Detail</button> -->
+                <!-- <button class="btn btn-danger ml-4" (click)="onDetaile(user.id)">Detail</button> -->
 
-            </td>
+              </td>
 
-          </tr>
-        </tbody>
-      </table>
-      <div class="d-flex justify-content-end">
-        <!-- class="" -->
-        <pagination-controls (pageChange)="page = $event" ></pagination-controls>
-        <div class="dataTable-dropdown text-right mr-2"><label>
-            <select class="dataTable-selector" [(ngModel)]="item">
-              <option value=5>5</option>
-              <option value=10>10</option>
-              <option value=15>15</option>
-              <option value=20>20</option>
-              <option value=25>25</option>
-            </select>
-            entries per page </label>
+            </tr>
+          </tbody>
+        </table>
+        <div class="d-flex justify-content-end">
+          <!-- class="" -->
+          <pagination-controls (pageChange)="page = $event"></pagination-controls>
+          <div class="dataTable-dropdown text-right mr-2"><label>
+              <select class="dataTable-selector" [(ngModel)]="item">
+                <option value=5>5</option>
+                <option value=10>10</option>
+                <option value=15>15</option>
+                <option value=20>20</option>
+                <option value=25>25</option>
+              </select>
+              entries per page </label>
+          </div>
         </div>
-      </div>
 
-      <!-- </div> -->
+        <!-- </div> -->
+      </div>
     </div>
+
     <!-- <app-add-user [userListItem]="userList"></app-add-user> -->
     <!-- <app-edit-user ></app-edit-user> -->
   </div>
