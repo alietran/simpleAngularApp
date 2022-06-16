@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
+import { FormGroup, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user.model';
 import { UserService } from 'src/app/Services/user.service';
-
+import { EditUserComponent } from '../edit-user/edit-user.component';
+interface Status {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -11,33 +17,42 @@ export class UserListComponent implements OnInit {
  public userList: User[] = [];
   page: number = 1 ;
   item : number = 5;
-  statusSelected:boolean;
+  statusSelected:string = "all";
   name: any;
   orderTitle : string = '';
   descOrder: boolean = true;
   fullname: string = "";
-  constructor(private api: UserService) { }
+  dataUser: any;
+  userStatus: boolean = true;
+  showStatus : boolean =true;
+  isChecked = true;
+    foods: Status[] = [
+    {value: 'all', viewValue: 'All'},
+    {value: 'true', viewValue: 'Active'},
+    {value: 'false', viewValue: 'Suspended'},
+  ];
+  // idUser: number;
+  @ViewChildren(EditUserComponent) updateStatus : EditUserComponent;
+  constructor(private api: UserService, private router:  Router) { }
   ngOnInit(): void {
-      
-    this.api.getAllUser().subscribe((data:any)=>{
-        for (var val of data) {
-             val.dob =  val.dob.slice(0,10);
-            val.email = this.censorEmail(val.email)
-                
-        }
-      this.userList = data;
-        console.log("userList",this.userList)
-    })
+    setTimeout(()=>{
+        this.getUserList();
+    },500)
+
 
   }
-      ngOnChange(){
-        this.changeStatus();
-        
-      }
 
-    censorWord(str :any) {
-        return str[0] + "*".repeat(str.length ) + str.slice(-1);
-      }
+  getUserList(){
+     this.api.getAllUser().subscribe((data:any)=>{
+        for (var val of data) {
+            //  val.dob =  val.dob?.slice(0,10);
+            val.email = this.censorEmail(val.email)
+
+        }
+      this.userList = data;
+        // console.log("userList",this.userList)
+    })
+  }
 
     censorEmail (email:any){ {
         var parts = email?.split("@");
@@ -63,13 +78,12 @@ export class UserListComponent implements OnInit {
 
     search(){
       if(this.name == "") {
-        this.ngOnInit();
+        this.getUserList();
       }
       else{
         console.log("name",this.name)
         this.userList = this.userList.filter(res=>{
-          return (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()));
-          // || res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()));
+          (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase())) || (res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()));
         })
       }
   }
@@ -78,16 +92,30 @@ export class UserListComponent implements OnInit {
     this.descOrder = !this.descOrder
     this.orderTitle = titleName; //fullname or phone or email
   }
-
-
     changeStatus(){
       this.page =1;
     }
     onDelete(id: number){
       this.api.deleteUser(id).subscribe(res=>{
-      this.ngOnInit()
+      this.getUserList();
       })
 
     }
 
+
+    async changeStatusUser(id:number){
+        // console.log("  console.log(this.updateStatus?.editUserForm);",this.updateStatus.editUserForm.status);
+      this.api.getUserDetail(id).subscribe(async(data : any) => {
+      data.status = !data.status;
+      (await this.api.editUser(id, data)).subscribe(data=>{
+            console.log("dataStatus1",data.status)
+            this.getUserList();
+          })
+      })
+      localStorage.setItem("isChanged","true");
+    }
+    logout(){
+      localStorage.setItem(("isLogin"),"false")
+      this.router.navigate(['login'])
+    }
 }

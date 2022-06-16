@@ -1,77 +1,125 @@
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add New User</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+<div class=" addUser__background">
+  <form id="addUserForm" class="addUser__form" [formGroup]="addUserForm">
+    <h1 class="addUser__form__title ">Add new User </h1>
+    <div class="d-flex justify-content-between">
+      <div class="addUser__form__input form-group">
+        <label for="firstname">First Name <span class="text-danger">(*)<span class="text-danger"
+              style="font-size: 12px;"
+              *ngIf="addUserForm.get('firstname').touched && addUserForm.get('firstname').invalid">
+              Required </span></span></label>
+        <input formControlName="firstname" value="" id="firstname" type="text" name="firstname">
+        <!-- <span class="text-danger"
+                  *ngIf="addUserForm.get('firstname').touched && addUserForm.get('firstname').invalid">
+                  Firstname is required </span> -->
       </div>
-      <div class="modal-body  ">
-        <div class=" addUser__background">
-          <form id="addUserForm" class="addUser__form"  [formGroup]="addUserForm">
-            <div class="d-flex">
-              <div class="addUser__form__input mr-2 form-group">
-                <label for="firstname">First Name <span style="color:red; font-weight: normal;">(*)</span></label>
-                <input formControlName="firstname" value="" id="firstname" type="text" name="firstname">
-              </div>
-              <div class="addUser__form__input form-group">
-                <label for="lastname">Last Name <span style="color:red; font-weight: normal;">(*)</span></label>
-                <input formControlName="lastname" value="" id="lastname" type="text" name="lastname">
-              </div>
-            </div>
+      <div class="addUser__form__input form-group">
+        <label for="lastname">Last Name <span class="text-danger">(*)<span class="text-danger" style="font-size: 12px;"
+              *ngIf="addUserForm.get('lastname')?.touched && addUserForm.get('lastname')?.invalid">
+              Required </span></span></label>
+        <input formControlName="lastname" value="" id="lastname" type="text" name="lastname">
 
-            <div class="addUser__form__input form-group">
-              <label for="email">Email <span style="color:red; font-weight: normal;">(*)</span></label>
-              <input formControlName="email" value="" id="email" type="email" name="email">
-
-            </div>
-
-            <div class="addUser__form__input form-group">
-              <label for="phone">Phone <span style="color:red; font-weight: normal;">(*)</span></label>
-              <input formControlName="phone" value="" id="phone" type="phone" name="phone">
-
-
-            </div>
-            <div class="d-flex">
-              <div class="addUser__form__input form-group">
-                <label for="dob">Date Of Birth <span style="color:red; font-weight: normal;">(*)</span></label>
-                <!-- <input formControlName="dob" value="" id="dob" type="password" name="dob"> -->
-                <input type="date" id="dob"  formControlName="dob" value="" id="dob"name="dob" value="yyyy/mm/dd">
-              </div>
-              <div class="addUser__form__input form-group">
-                <label for="status">Status<span style="color:red; font-weight: normal;">(*)</span></label>
-                <input formControlName="status" value="" id="status" type="text" name="status">
-              </div>
-            </div>
-            <fieldset formGroupName="social">
-              <div class="addUser__form__input form-group">
-                <label for="facebook">Facebook</label>
-                <input formControlName="facebook" class="form-control" value="" id="facebook" type="url"
-                  name="facebook">
-
-              </div>
-              <div class="addUser__form__input form-group">
-                <label for="linkedin">Linkedin</label>
-                <input formControlName="linkedin" class="form-control" value="" id="linkedin" type="url"
-                  name="linkedin">
-
-              </div>
-              <div class="addUser__form__input form-group">
-                <label for="twitter">Twitter</label>
-                <input formControlName="twitter" class="form-control" value="" id="twitter" type="url" name="twitter">
-              </div>
-            </fieldset>
-
-
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary "  >Save changes</button>
-        <!-- [disabled]="!addUserForm.valid" (click)="onSubmit()"-->
       </div>
     </div>
-  </div>
+
+    <div class="addUser__form__input form-group">
+      <label for="email">Email <span class="text-danger">(*)<span class="text-danger" style="font-size: 12px;"
+            *ngIf="addUserForm.get('email')?.touched && addUserForm.get('email')?.invalid">
+            required </span></span></label>
+      <input formControlName="email" value="" id="email" type="email" name="email">
+
+    </div>
+
+    <div class="addUser__form__input form-group">
+      <label for="phone">Phone <span class="text-danger">(*)<span class="text-danger" style="font-size: 12px;"
+            *ngIf="addUserForm.get('phone')?.touched && addUserForm.get('phone')?.invalid">
+            Required </span></span></label>
+      <input formControlName="phone" value="" id="phone" type="phone" name="phone">
+
+
+    </div>
+    <div class="d-flex">
+      <div class="addUser__form__input form-group">
+        <label for="dob">Date Of Birth</label>
+        <!--
+          <input type="date" id="dob" formControlName="dob" value="" id="dob" name="dob" value="đ/mm/yyyy"> -->
+        <mat-form-field appearance="fill" class="mr-3">
+          <mat-label>Choose a date</mat-label>
+          <input [ngModel]="today " id="dob" formControlName="dob" value="" id="dob" name="dob" matInput
+            [matDatepicker]="picker" class="p-0" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <span class="text-danger" *ngIf="addUserForm.get('dob')?.touched && addUserForm.get('dob')?.invalid">
+          Dob is required </span>
+      </div>
+
+
+      <div class="addUser__form__input form-group">
+        <label for="status">Status<span class="text-danger">(*)</span></label>
+        <!-- <input formControlName="status" value="" id="status" type="text" name="status"> -->
+        <mat-form-field appearance="fill">
+          <mat-label>Status</mat-label>
+          <mat-select [(ngModel)]="statusSelected" formControlName="status">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </div>
+    <!-- class="d-flex social" -->
+    <fieldset formGroupName="socialLink" class="d-flex social">
+      <div class="addUser__form__input form-group">
+        <div class="d-flex "><label for="facebook" class="mr-2">Facebook</label>
+          <span class="text-danger"
+            *ngIf="addUserForm.get('socialLink.facebook')?.invalid && addUserForm.get('socialLink.facebook')?.touched ">
+            Invalid </span>
+        </div>
+
+        <input formControlName="facebook" class="form-control py-4 px-4" value="" id="facebook" type="url"
+          name="facebook">
+
+      </div>
+      <div class="addUser__form__input form-group">
+        <div class="d-flex ">
+          <label for="linkedin" class="mr-2">Linkedin</label><span class="text-danger"
+            *ngIf="addUserForm.get('socialLink.linkedin')?.invalid && addUserForm.get('socialLink.linkedin')?.touched ">
+            Invalid </span>
+        </div>
+
+        <input formControlName="linkedin" class="form-control py-4 px-4" value="" id="linkedin" type="url"
+          name="linkedin">
+
+      </div>
+      <div class="addUser__form__input form-group">
+        <div class="d-flex">
+          <label for="twitter" class="mr-2">Twitter</label><span class="text-danger"
+            *ngIf="addUserForm.get('socialLink.twitter')?.invalid && addUserForm.get('socialLink.twitter')?.touched ">
+            Invalid </span>
+        </div>
+
+        <input formControlName="twitter" class="form-control py-4 px-4" value="" id="twitter" type="url" name="twitter">
+
+      </div>
+    </fieldset>
+    <div class="d-flex justify-content-end">
+      <!-- (click)="back()" -->
+      <button class="btn btn-cancel" (click)="back()">Back</button>
+      <button type="button" class="btn btn--primary" name="btn-signup" [disabled]="!addUserForm.valid"
+        (click)="onSubmit()">Save
+        changes</button>
+    </div>
+  </form>
+
+
+
 </div>
+
+
+<!-- <div>{{addUserForm.value | json}}</div>
+      <div>{{addUserForm.controls.firstname.invalid | json}}</div> -->
+
+
+
+<!-- [disabled]="!addUserForm.valid" (click)="onSubmit()"-->

@@ -1,0 +1,111 @@
+
+        <div class=" addUser__background">
+          <form id="addUserForm" class="addUser__form"  [formGroup]="editUserForm" (ngSubmit)="onUpdate()">
+              <h1 class="addUser__form__title">Edit User </h1>
+            <div class="d-flex justify-content-between">
+              <div class="addUser__form__input form-group">
+                <label for="firstname">First Name <span style="color:red; font-weight: normal;">(*)</span></label>
+                <input formControlName="firstname" value="" id="firstname" type="text" name="firstname">
+                <!-- <span class="text-danger"
+                  *ngIf="addUserForm.get('firstname').touched && addUserForm.get('firstname').invalid">
+                  Firstname is required </span> -->
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="lastname">Last Name <span style="color:red; font-weight: normal;">(*)</span></label>
+                <input formControlName="lastname" value="" id="lastname" type="text" name="lastname">
+                <!-- <span class="text-danger"
+                  *ngIf="addUserForm.get('lastname')?.touched && addUserForm.get('lastname')?.invalid">
+                  Lastname is required </span> -->
+              </div>
+            </div>
+
+            <div class="addUser__form__input form-group">
+              <label for="email">Email <span style="color:red; font-weight: normal;">(*)</span></label>
+              <input formControlName="email" value="" id="email" type="email" name="email">
+              <!-- <span class="text-danger" *ngIf="addUserForm.get('email')?.touched && addUserForm.get('email')?.invalid">
+                Email is required </span> -->
+            </div>
+
+            <div class="addUser__form__input form-group">
+              <label for="phone">Phone <span style="color:red; font-weight: normal;">(*)</span></label>
+              <input formControlName="phone" value="" id="phone" type="phone" name="phone">
+              <!-- <span class="text-danger" *ngIf="addUserForm.get('phone')?.touched && addUserForm.get('phone')?.invalid">
+                Phone is required </span> -->
+
+            </div>
+            <div class="d-flex">
+              <div class="addUser__form__input form-group">
+                <label for="dob">Date Of Birth</label>
+                <!-- <input type="date" [ngModel]="today | date:'yyyy-MM-dd'" id="dob" formControlName="dob" value="" id="dob" name="dob" value="yyyy/mm/dd"> -->
+                <mat-form-field appearance="fill" class="mr-3">
+                  <mat-label>Choose a date</mat-label>
+                  <input [ngModel]="today " id="dob" formControlName="dob" value="" id="dob" name="dob" matInput [matDatepicker]="picker" class="p-0"/>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <!-- <span class="text-danger" *ngIf="addUserForm.get('dob')?.touched && addUserForm.get('dob')?.invalid">
+                  Dob is required </span> -->
+              </div>
+              <div class="addUser__form__input form-group">
+                <label for="status">Status<span style="color:red; font-weight: normal;">(*)</span></label>
+                <mat-form-field appearance="fill">
+                  <mat-label >Status</mat-label>
+                  <mat-select [(ngModel)]="selectedValue"  formControlName="status">
+                    <mat-option *ngFor="let food of foods" [value]="food.value">
+                      {{food.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+                <!-- <input formControlName="status" value="" id="status" type="text" name="status"> -->
+                <!-- <span class="text-danger"
+                  *ngIf="addUserForm.get('status')?.touched && addUserForm.get('status')?.invalid">
+                  Status is required </span> -->
+              </div>
+            </div>
+            <!-- class="d-flex social" -->
+          <fieldset formGroupName="socialLink" class="d-flex social">
+            <div class="addUser__form__input form-group">
+              <div class="d-flex "><label for="facebook" class="mr-2">Facebook</label>
+                <span class="text-danger"
+                  *ngIf="editUserForm.get('socialLink.facebook')?.invalid && editUserForm.get('socialLink.facebook')?.touched ">
+                  Invalid </span>
+              </div>
+
+              <input formControlName="facebook" class="form-control py-4 px-4" value="" id="facebook" type="url" name="facebook">
+
+            </div>
+            <div class="addUser__form__input form-group">
+              <div class="d-flex ">
+                <label for="linkedin" class="mr-2">Linkedin</label><span class="text-danger"
+                  *ngIf="editUserForm.get('socialLink.linkedin')?.invalid && editUserForm.get('socialLink.linkedin')?.touched ">
+                  Invalid </span>
+              </div>
+
+              <input formControlName="linkedin" class="form-control py-4 px-4" value="" id="linkedin" type="url" name="linkedin">
+
+            </div>
+            <div class="addUser__form__input form-group">
+              <div class="d-flex">
+                <label for="twitter" class="mr-2">Twitter</label><span class="text-danger"
+                  *ngIf="editUserForm.get('socialLink.twitter')?.invalid && editUserForm.get('socialLink.twitter')?.touched ">
+                  Invalid </span>
+              </div>
+
+              <input formControlName="twitter" class="form-control py-4 px-4" value="" id="twitter" type="url" name="twitter">
+
+            </div>
+          </fieldset>
+            <div class="d-flex justify-content-end">
+                <button class="btn btn-cancel" (click)="back()">Back</button>
+              <button type="submit" class="btn btn--primary" name="btn-signup">Update</button>
+
+            </div>
+
+          </form>
+        </div>
+
+      <!-- <div>{{editUserForm.value | json}}</div>
+      <div>{{addUserForm.controls.firstname.invalid | json}}</div> -->
+
+

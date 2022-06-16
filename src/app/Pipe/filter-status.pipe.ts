@@ -5,9 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterStatusPipe implements PipeTransform {
 
-  transform(account: any[], status: boolean): any {
+  transform(account: any[], status: string): any {
     console.log("value ",status + "")
-    if(status === undefined || status.toString() === "all"){
+    if(status === undefined || status === "all"){
      return  account = account
     }
     account =  account.filter(user=>{
