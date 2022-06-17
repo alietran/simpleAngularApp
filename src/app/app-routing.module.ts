@@ -9,7 +9,7 @@ import { UserListComponent } from './Components/user-list/user-list.component';
 const routes: Routes = [
 {path:"login",component: LoginComponent},
 {path:"", redirectTo: "/login", pathMatch:"full"},
-{path:"admin/users",component: UserListComponent,canActivate:[AuthGuard]},
+{path:"admin",component: UserListComponent,canActivate:[AuthGuard]},
 {path:"admin/add-user",component: AddUserComponent,canActivate:[AuthGuard]},
 {path:"admin/edit-user/:id",component: EditUserComponent,canActivate:[AuthGuard]},
 

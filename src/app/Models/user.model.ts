@@ -1,6 +1,6 @@
 export class User
 {
-    id:number;
+    // id:number;
     firstname:string;
     lastname:string;
     email:string;
@@ -8,8 +8,9 @@ export class User
     dob:Date;
     status: boolean;
     socialLink: Array<string>;
-    constructor(id:number, firstname: string, lastname:string, email: string, phone: string, dob: Date,status: boolean,socialLink: Array<string>){
-      this.id = id;
+    // id:number,
+    constructor( firstname: string, lastname:string, email: string, phone: string, dob: Date,status: boolean,socialLink: Array<string>){
+      // this.id = id;
       this.firstname= firstname;
       this.lastname = lastname;
       this.email= email;

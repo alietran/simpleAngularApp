@@ -11,7 +11,7 @@ import { UserService } from 'src/app/Services/user.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
- 
+
    loginForm = new FormGroup({
       email: new FormControl('',Validators.required),
       password: new FormControl('',Validators.required),
@@ -25,10 +25,10 @@ export class LoginComponent implements OnInit {
     const email = "admin@gmail.com";
     const password = "123456";
     if(email === this.loginForm.value.email && password === this.loginForm.value.password){
-      this.router.navigate(['/admin/users']);
+      this.router.navigate(['admin']);
       localStorage.setItem("isLogin", "true");
     }
-    
+
   }
 }
 

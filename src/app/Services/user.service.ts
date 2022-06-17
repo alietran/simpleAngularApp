@@ -12,7 +12,7 @@ export class UserService {
   api="https://62a6bd07bedc4ca6d7b90ebe.mockapi.io/api/users";
 
   constructor(private http: HttpClient, private location:Location) { }
-  
+
   getAllUser():Observable<User[]>{
     return this.http.get<User[]>(this.api).pipe(map(res => {
       return res
@@ -38,7 +38,7 @@ export class UserService {
   }
    back(){
           this.location.back();
-        }
+  }
 
 
 }

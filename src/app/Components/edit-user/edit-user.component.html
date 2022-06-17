@@ -1,6 +1,6 @@
 
         <div class=" addUser__background">
-          <form id="addUserForm" class="addUser__form"  [formGroup]="editUserForm" (ngSubmit)="onUpdate()">
+          <form id="addUserForm" class="addUser__form"  [formGroup]="editUserForm" >
               <h1 class="addUser__form__title">Edit User </h1>
             <div class="d-flex justify-content-between">
               <div class="addUser__form__input form-group">
@@ -98,7 +98,7 @@
           </fieldset>
             <div class="d-flex justify-content-end">
                 <button class="btn btn-cancel" (click)="back()">Back</button>
-              <button type="submit" class="btn btn--primary" name="btn-signup">Update</button>
+              <button type="submit" class="btn btn--primary" name="btn-signup" (click)="onUpdate()" >Update</button>
 
             </div>
 

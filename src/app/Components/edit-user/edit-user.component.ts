@@ -6,6 +6,7 @@ import { UserService } from 'src/app/Services/user.service';
 import { UserListComponent } from '../user-list/user-list.component';
 import { formatDate, Location } from '@angular/common';
 import * as alertify from 'alertifyjs';
+import Swal from 'sweetalert2';
 interface Status {
   value: string;
   viewValue: string;
@@ -80,10 +81,20 @@ export class EditUserComponent implements OnInit {
         onUpdate()   {
           this.api.editUser(this.id, this.editUserForm.value).subscribe(data=>{
             // console.log("this.editUserForm.value",this.editUserForm.value);
-               this.router.navigate(['admin/users'])
-               setTimeout(()=>{
-                 alertify.success('Success message');
-               },300)
+               this.router.navigate(['admin'])
+              //  setTimeout(()=>{
+              //    alertify.success('Success message');
+              //  },300)
+                Swal.fire({
+                icon: 'success',
+                title: 'Edit Successfully',
+                showConfirmButton: false,
+                timer: 2000,
+                width:250,
+                position: 'top-right',
+              customClass: 'swal2-toast',
+                backdrop: false
+            })
 
           })
 

@@ -5,9 +5,8 @@
   // background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(224, 232, 245, 1) 100%);
   // background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(224, 232, 245, 1) 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#e0e8f5',GradientType=0 );
-
   .wrap {
-    padding: 20px 10px 20px 10px;
+    padding: 15px 30px 15px 30px;
     background-color: #f4f6f9;
     border-radius: 10px;
     .card {
@@ -36,7 +35,7 @@
     outline: none;
     font-size: 16px;
     padding: 11px 20px;
-    width: 80%;
+    width: 76%;
     position: absolute;
     right: 0;
     top: 4px;
@@ -47,8 +46,39 @@
       transition: all 200ms ease-in;
     }
   }
+  .table tbody tr td {
+    font-size: 13px;
+    .modal{
+      font-size: 16px;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-  
+  .container {
+    .option {
+      margin-right: 10px;
+    }
+    max-width: 100%;
+    padding: 0;
+    .dataTable-input {
+      width: 67%;
+    }
+    .table {
+      .thead-light {
+        th {
+          font-size: 13px;
+          white-space: nowrap;
+        }
+      }
+      tbody {
+        tr td:last-child {
+          display: flex;
+          a {
+            padding: 0.05rem 0.4rem;
+          }
+        }
+      }
+    }
+  }
 }

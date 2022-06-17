@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user.model';
 import { UserService } from 'src/app/Services/user.service';
+import Swal from 'sweetalert2';
 
 interface Status {
   value: string;
@@ -64,10 +65,17 @@ export class AddUserComponent implements OnInit {
        this.addUserForm.reset()
 
 
-        this.router.navigateByUrl('/admin/users');
-        alertify.success('Success message');
-      //  alertify.set('notifier','position', 'top-right');
-      //  alertify.success( alertify.get('notifier','position'));
+        this.router.navigateByUrl('admin');
+          Swal.fire({
+                icon: 'success',
+                title: 'Add Successfully',
+                showConfirmButton: false,
+                timer: 2000,
+                width:250,
+                position: 'top-right',
+              customClass: 'swal2-toast',
+                backdrop: false
+            })
 
     };
       back(){

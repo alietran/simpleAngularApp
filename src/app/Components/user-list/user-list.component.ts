@@ -3,6 +3,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user.model';
 import { UserService } from 'src/app/Services/user.service';
+import Swal from 'sweetalert2';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 interface Status {
   value: string;
@@ -25,6 +26,7 @@ export class UserListComponent implements OnInit {
   dataUser: any;
   userStatus: boolean = true;
   showStatus : boolean =true;
+  total: number;
   isChecked = true;
     foods: Status[] = [
     {value: 'all', viewValue: 'All'},
@@ -37,7 +39,7 @@ export class UserListComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(()=>{
         this.getUserList();
-    },500)
+    },800)
 
 
   }
@@ -50,6 +52,7 @@ export class UserListComponent implements OnInit {
 
         }
       this.userList = data;
+      this.total = this.userList.length
         // console.log("userList",this.userList)
     })
   }
@@ -83,7 +86,7 @@ export class UserListComponent implements OnInit {
       else{
         console.log("name",this.name)
         this.userList = this.userList.filter((res)=>{
-
+          //  console.log(res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()) || res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()))
           return (res.firstname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()) || res.lastname.toLocaleLowerCase().match(this.name.toLocaleLowerCase()))
 
 
@@ -105,6 +108,16 @@ export class UserListComponent implements OnInit {
     onDelete(id: number){
       this.api.deleteUser(id).subscribe(res=>{
       this.getUserList();
+        //  Swal.fire({
+        //         icon: 'success',
+        //         title: 'Delete Successfully',
+        //         showConfirmButton: false,
+        //         timer: 2000,
+        //         width:250,
+        //         position: 'top-right',
+        //       customClass: 'swal2-toast',
+        //         backdrop: false
+        //     })
       })
 
     }
