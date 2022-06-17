@@ -32,12 +32,17 @@
     <!-- <img class="login__form__logo" src="./public/img/login.jpg" alt="logo"> -->
         <h1 class="login__form__title">LOGIN</h1>
     <div class="login__form__input form-group">
-      <label for="email">Email</label>
+      <label for="email">Email<span class="text-danger"> * </span><span   style="font-size: 12px;" class="text-danger" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched ">
+        Required </span></label>
       <input id="email" type="text" formControlName="email" name="email" placeholder="Type your email...">
 
     </div>
-    <div class="login__form__input form-group">
-      <label for="password">Password</label>
+    <div class="login__form__input form-group ">
+      <label for="password">Password<span class="text-danger"> * </span>
+        <span class="text-danger "  style="font-size: 12px;"
+          *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched ">
+          Required </span>
+      </label>
       <input id="password" type="password" formControlName="password" name="password" placeholder="Type your password...">
     </div>
     <input type="submit" name="btn-login" class="btn btn--primary" value="Login" style="padding:13px 0"
